@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ClickUp-style Light Mixer Theme */
+@theme {
+  --color-primary: #7B68EE;
+  --color-primary-light: #9B8BFF;
+  --color-primary-dark: #5A4BD1;
+  --color-secondary: #49CCF9;
+  --color-secondary-light: #7DDDFF;
+  --color-coral: #FF6B6B;
+  --color-amber: #FFC145;
+  --color-green: #22c55e;
+  --color-pink: #FF78CB;
+  --color-teal: #2ECDA7;
+  --color-indigo: #667EEA;
+  --color-bg-page: #F7F8FC;
+  --color-bg-card: #FFFFFF;
+  --color-bg-sidebar: #ECEDF3;
+  --color-bg-hover: #F0F1F7;
+  --color-text-primary: #1B1D2A;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-card-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Animation utilities */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: slideInFromTop 0.2s ease-out;
+}
+
+/* Gradient utilities */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-indigo));
+}
+
+.gradient-vibrant {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+
+/* Leaflet map container reset */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
