@@ -81,12 +81,13 @@ export function AuthProvider({ children }) {
     // Sign out
     const signOut = async () => {
         try {
-            await supabase.auth.signOut();
+            await supabase.auth.signOut({ scope: 'local' });
         } catch (error) {
             console.error('Sign out error:', error);
         } finally {
             setUser(null);
             setProfile(null);
+            localStorage.clear();
         }
     };
 

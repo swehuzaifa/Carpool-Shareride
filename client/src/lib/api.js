@@ -24,7 +24,11 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         if (error.response?.status === 401) {
-            await supabase.auth.signOut();
+            try {
+                await supabase.auth.signOut({ scope: 'local' });
+            } catch (err) {
+                console.error('Sign out error on 401:', err);
+            }
             window.location.href = '/login';
         }
         return Promise.reject(error);
