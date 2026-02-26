@@ -4,11 +4,42 @@ const { calculateRouteMatch } = require('./ride.matching');
 const createRide = async (req, res, next) => {
     try {
         const driverId = req.user.id;
+        const {
+            origin_address, origin_lat, origin_lng,
+            destination_address, destination_lat, destination_lng,
+            departure_time, total_seats, price_per_seat,
+            vehicle_info, notes, waypoints, estimated_duration,
+            preferences, tags,
+        } = req.body;
 
-        const ride = await rideService.create({
+        const rideData = {
             driver_id: driverId,
-            ...req.body,
-        });
+            origin_address,
+            origin_lat,
+            origin_lng,
+            destination_address,
+            destination_lat,
+            destination_lng,
+            departure_time,
+            total_seats,
+            price_per_seat,
+        };
+
+        // vehicle_info is JSONB in DB — wrap string in object
+        if (vehicle_info) {
+            rideData.vehicle_info = typeof vehicle_info === 'string'
+                ? { description: vehicle_info }
+                : vehicle_info;
+        }
+
+        if (notes) rideData.notes = notes;
+        if (preferences) rideData.preferences = typeof preferences === 'object' ? preferences : {};
+
+        if (waypoints) rideData.waypoints = waypoints;
+        if (estimated_duration) rideData.estimated_duration = estimated_duration;
+        if (tags) rideData.tags = tags;
+
+        const ride = await rideService.create(rideData);
 
         res.status(201).json({
             success: true,

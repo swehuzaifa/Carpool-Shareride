@@ -80,9 +80,14 @@ export function AuthProvider({ children }) {
 
     // Sign out
     const signOut = async () => {
-        await supabase.auth.signOut();
-        setUser(null);
-        setProfile(null);
+        try {
+            await supabase.auth.signOut();
+        } catch (error) {
+            console.error('Sign out error:', error);
+        } finally {
+            setUser(null);
+            setProfile(null);
+        }
     };
 
     // Update user role
