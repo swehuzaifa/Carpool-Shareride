@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS public.rides (
   price_per_seat NUMERIC(10,2) NOT NULL,
   vehicle_info JSONB DEFAULT '{}'::jsonb,
   preferences JSONB DEFAULT '{}'::jsonb,
+  notes TEXT,
   status TEXT CHECK (status IN ('active', 'arrived', 'ongoing', 'completed', 'cancelled')) DEFAULT 'active',
   tags TEXT[] DEFAULT '{}',
   created_at TIMESTAMPTZ DEFAULT NOW(),
